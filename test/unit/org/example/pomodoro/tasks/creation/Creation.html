@@ -1,0 +1,52 @@
+<html xmlns:concordion="http://www.concordion.org/2007/concordion">
+
+<head>
+    <link href="../../../concordion.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+    <h1>Task Creation</h1>
+
+    <p>
+        There is a Create Task form you can use to store a new task.
+    </p>
+
+    <div class="example">
+        <p>Given the following values for a task:</p>
+
+	<table>
+	  <tr>
+	    <th>Summary</th>
+	    <th>Details</th>
+	    <th>Status</th>
+	    <th>Deadline Day</th>
+	    <th>Deadline Month</th>
+	    <th>Deadline Year</th>
+	    <th>Time Spent</th>
+	  </tr>
+	  <tr>
+	    <td concordion:set="#summary">Write concordion specs</td>
+	    <td concordion:set="#details">Runnable specifications for the new project</td>
+	    <td concordion:set="#status">Open</td>
+	    <td concordion:set="#deadlineDay">1</td>
+	    <td concordion:set="#deadlineMonth">1</td>
+	    <td concordion:set="#deadlineYear">2025</td>
+	    <td concordion:set="#timeSpent">0</td>
+	  </tr>
+	</table>
+
+	<p>
+	    When <span concordion:execute="createTask(#summary, #details, #status, #deadlineDay, #deadlineMonth, #deadlineYear, #timeSpent)">a user fills in the Create Task form with the previous values</span> the task 
+	    will be saved <span concordion:assertFalse="existsTaskCreationErrorMessage()">successfully</span> and the 
+	    list of tasks contains one with "<span concordion:assertTrue="taskSummariesContains(#TEXT)">Write concordion specs</span>" as summary.
+	</p>
+
+    </div>
+
+    <h2>Further Details</h2>
+    <ul>
+        <li><a href="creation/checkMandatory.html">What if mandatory fields are missing?</a></li>
+    </ul>
+
+</body>
+</html>
