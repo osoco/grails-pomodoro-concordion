@@ -16,8 +16,8 @@ grails.project.dependency.resolution = {
 
         // uncomment the below to enable remote dependency resolution
         // from public Maven repositories
-        //mavenLocal()
-        //mavenCentral()
+        mavenLocal()
+        mavenCentral()
         //mavenRepo "http://snapshots.repository.codehaus.org"
         //mavenRepo "http://repository.codehaus.org"
         //mavenRepo "http://download.java.net/maven/2/"
@@ -27,5 +27,11 @@ grails.project.dependency.resolution = {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
 
         // runtime 'mysql:mysql-connector-java:5.1.13'
+
+	test('org.concordion:concordion:1.4.1') {
+	    exclude 'xml-apis'
+	}
+	test("org.codehaus.geb:geb-core:latest.release")
+	test("org.seleniumhq.selenium:selenium-firefox-driver:2.0a7")
     }
 }
