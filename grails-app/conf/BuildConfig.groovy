@@ -31,6 +31,7 @@ grails.project.dependency.resolution = {
 	test('org.concordion:concordion:1.4.1') {
 	    exclude 'xml-apis'
 	}
+	test('org.concordion:concordion-extensions:1.0.2')
 	test("org.codehaus.geb:geb-core:latest.release")
 	test("org.seleniumhq.selenium:selenium-firefox-driver:2.0a7")
     }
