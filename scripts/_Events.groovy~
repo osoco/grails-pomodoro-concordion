@@ -1,0 +1,23 @@
+
+import org.codehaus.groovy.grails.test.junit4.JUnit4GrailsTestType
+ 
+eventAllTestsStart = {
+    phasesToRun << "concordion"
+}
+ 
+// 2. Create a custom test type
+def testTypeName = "custom"
+def testDirectory = "custom"
+def testMode = new GrailsTestMode(autowire: true)
+def customTestType = new JUnit4GrailsTestType(testTypeName, testDirectory, testMode)
+ 
+// 3. Create a «phase name»Tests variable containing the test type(s)
+customTests = [customTestType]
+ 
+// 4. Create pre and post closures
+customTestPhasePreparation = {
+    functionalTestPhasePreparation()
+}
+customTestPhaseCleanUp = {
+    functionalTestPhaseCleanUp()
+}

@@ -3,16 +3,31 @@ package org.example.pomodoro.tasks.creation;
 
 import geb.Page
 
-import org.concordion.integration.junit3.ConcordionTestCase;
+import org.concordion.ext.ScreenshotExtension;
+import org.concordion.ext.TimestampFormatterExtension;
+import org.concordion.integration.junit4.ConcordionRunner;
 
 import org.example.pomodoro.pages.CreateTaskPage
 import org.example.pomodoro.pages.TaskListPage
 
+import static org.junit.Assert.*
+import org.junit.Before
+import org.junit.Test
+import org.junit.runner.RunWith
 
-public class CreationTest extends ConcordionTestCase {
+
+@RunWith(ConcordionRunner.class)
+public class CreationTest {
 
     def resultingPage
 
+    @Before
+    public void loadExtensions() {
+        System.setProperty(
+            "concordion.extensions", 
+            "org.concordion.ext.ScreenshotExtension, org.concordion.ext.TimestampFormatterExtension")
+    }
+    
     public void createTask(
             String summary, 
 	    String details,
@@ -41,5 +56,5 @@ public class CreationTest extends ConcordionTestCase {
         println "summaries: ${TaskListPage.taskSummaries()}"
 	TaskListPage.taskSummaries().any { it == summary }
     }
-    
+
 }
