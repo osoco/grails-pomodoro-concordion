@@ -1,14 +1,17 @@
 package org.example.pomodoro.tasks.creation;
 
+
 import geb.Page
 
 import org.concordion.integration.junit3.ConcordionTestCase;
+
 import org.example.pomodoro.pages.CreateTaskPage
+import org.example.pomodoro.pages.TaskListPage
 
 
 public class CreationTest extends ConcordionTestCase {
 
-    Page resultingPage
+    def resultingPage
 
     public void createTask(
             String summary, 
@@ -31,11 +34,12 @@ public class CreationTest extends ConcordionTestCase {
     }
 
     public boolean existsTaskCreationErrorMessage() {
-	null
+        resultingPage?.creationErrors
     }
 
     public boolean taskSummariesContains(String summary) {
-	true
+        println "summaries: ${TaskListPage.taskSummaries()}"
+	TaskListPage.taskSummaries().any { it == summary }
     }
-
+    
 }
