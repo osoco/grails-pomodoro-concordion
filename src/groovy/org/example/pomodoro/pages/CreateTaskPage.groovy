@@ -1,10 +1,15 @@
 package org.example.pomodoro.pages
 
+
 import geb.Browser
 import geb.Page
 
+import org.openqa.selenium.WebDriver
+
 
 public class CreateTaskPage extends Page {
+
+    def webDriver
 
     static url = "http://localhost:8080/PomodoroApp/task/create"
     static at = { title == "Create Task" }
@@ -20,9 +25,14 @@ public class CreateTaskPage extends Page {
         creationErrors(required: false) { $("div.errors") }
     }
 
-    static Page createTask(Map fieldsAndValues) {
-	def browser = new Browser(CreateTaskPage) 
+    public CreateTaskPage(WebDriver driver) {
+        webDriver = driver
+    }
+
+    Page createTask(Map fieldsAndValues) {
+	def browser = new Browser(webDriver) 
         browser.with {
+            to(CreateTaskPage)
 	    fieldsAndValues.each {
 	    	fieldName, fieldValue ->
 	    	page."$fieldName".value(fieldValue)

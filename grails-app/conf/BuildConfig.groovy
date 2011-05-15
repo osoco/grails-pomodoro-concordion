@@ -28,11 +28,25 @@ grails.project.dependency.resolution = {
 
         // runtime 'mysql:mysql-connector-java:5.1.13'
 
-	test('org.concordion:concordion:1.4.1') {
-	    exclude 'xml-apis'
-	}
-	test('org.concordion:concordion-extensions:1.0.2')
 	test("org.codehaus.geb:geb-core:latest.release")
 	test("org.seleniumhq.selenium:selenium-firefox-driver:2.0a7")
     }
 }
+
+//concordion.extensions = [ 
+//    "org.concordion.ext.TimestampFormatterExtension", 
+//    "org.concordion.ext.ScreenshotExtension", 
+//    "org.concordion.ext.LoggingTooltipExtension" ]
+
+//concordion.extensionFactories = [ es.osoco.grails.plugins.concordion.ConfigurableScreenshotExtensionFactory ]
+// concordion.screenshotExtensionFactoryConfiguration = {
+//         screenshotOnThrowable true
+//         screenshotOnAssertionFailure true
+//         screenshotOnAssertionSuccess false
+//         maxWidth 400
+//     }
+// concordion.loggingExtensionConfiguration = {
+//     loggerNames []
+//     level Level.INFO
+//     displayOnConsole false
+// }

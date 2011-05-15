@@ -1,33 +1,25 @@
 package org.example.pomodoro.tasks.creation;
 
 
-import geb.Page
-
-import org.concordion.ext.ScreenshotExtension;
-import org.concordion.ext.TimestampFormatterExtension;
-import org.concordion.integration.junit4.ConcordionRunner;
+import org.concordion.api.ExpectedToFail
+import org.concordion.ext.selenium.ScreenshotExtensionFactory
 
 import org.example.pomodoro.pages.CreateTaskPage
 import org.example.pomodoro.pages.TaskListPage
 
-import static org.junit.Assert.*
 import org.junit.Before
-import org.junit.Test
-import org.junit.runner.RunWith
+
+import org.openqa.selenium.WebDriver
+import org.openqa.selenium.firefox.FirefoxDriver
 
 
-@RunWith(ConcordionRunner.class)
+@ExpectedToFail
 public class CreationTest {
+
 
     def resultingPage
 
-    @Before
-    public void loadExtensions() {
-        System.setProperty(
-            "concordion.extensions", 
-            "org.concordion.ext.ScreenshotExtension, org.concordion.ext.TimestampFormatterExtension")
-    }
-    
+
     public void createTask(
             String summary, 
 	    String details,
@@ -37,7 +29,9 @@ public class CreationTest {
 	    String deadlineYear,
 	    String timeSpent) {
 
-	resultingPage = CreateTaskPage.createTask(
+        def webDriver = new FirefoxDriver()
+        def createTaskPage = new CreateTaskPage(webDriver)
+	resultingPage = createTaskPage.createTask(
 	    [summary: summary,
 	     details: details,
 	     status: status,
@@ -48,13 +42,17 @@ public class CreationTest {
 
     }
 
+
     public boolean existsTaskCreationErrorMessage() {
         resultingPage?.creationErrors
     }
 
+
     public boolean taskSummariesContains(String summary) {
-        println "summaries: ${TaskListPage.taskSummaries()}"
-	TaskListPage.taskSummaries().any { it == summary }
+        def webDriver = new FirefoxDriver()
+	def taskListPage = new TaskListPage(webDriver)
+        taskListPage.taskSummaries().any { it == summary }
     }
+
 
 }
