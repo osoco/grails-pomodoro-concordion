@@ -1,3 +1,5 @@
+import java.util.logging.Level
+
 grails.project.class.dir = "target/classes"
 grails.project.test.class.dir = "target/test-classes"
 grails.project.test.reports.dir = "target/test-reports"
@@ -33,20 +35,24 @@ grails.project.dependency.resolution = {
     }
 }
 
-//concordion.extensions = [ 
+// concordion.extensions = [ 
 //    "org.concordion.ext.TimestampFormatterExtension", 
 //    "org.concordion.ext.ScreenshotExtension", 
 //    "org.concordion.ext.LoggingTooltipExtension" ]
 
-//concordion.extensionFactories = [ es.osoco.grails.plugins.concordion.ConfigurableScreenshotExtensionFactory ]
-// concordion.screenshotExtensionFactoryConfiguration = {
-//         screenshotOnThrowable true
-//         screenshotOnAssertionFailure true
-//         screenshotOnAssertionSuccess false
-//         maxWidth 400
-//     }
-// concordion.loggingExtensionConfiguration = {
-//     loggerNames []
-//     level Level.INFO
-//     displayOnConsole false
-// }
+concordion.extensionFactories = [ 
+    "es.osoco.grails.plugins.concordion.extensions.ConfigurableScreenshotExtensionFactory",
+    "es.osoco.grails.plugins.concordion.extensions.ConfigurableLoggingTooltipExtensionFactory" ]
+
+concordion.screenshotExtensionFactoryConfiguration = {
+    screenshotOnThrowable true
+    screenshotOnAssertionFailure true
+    screenshotOnAssertionSuccess true
+    maxWidth 400
+}
+
+concordion.loggingTooltipExtensionFactoryConfiguration = {
+    loggers "org.example.pomodoro.pages, selenium.events"
+    level Level.FINE
+    showConsoleLogging true
+}
